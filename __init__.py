@@ -33,8 +33,6 @@ try:
 except:
     from mycroft.util import play_mp3
         AudioService = None
-from bs4 import BeautifulSoup
-import requests
 
 __author__ = 'Hasinator7'
 
@@ -209,4 +207,4 @@ class NatureSoundSkill(MycroftSkill):
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
 def create_skill():
-    return HelloWorldSkill()
+    return NatureSoundSkill()
