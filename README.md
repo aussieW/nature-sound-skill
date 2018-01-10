@@ -6,10 +6,10 @@ This skill plays a medium variety of relaxing nature sounds
 Work in progress
 
 Working features:
- - 
+ - ...
 
 Known issues:
  - ...
 
 TODO:
- - Add vocab, dialog and keywords
+ - Testing
