@@ -1,6 +1,6 @@
 # Nature Sound skill
 
-This skill plays a medium variety of relaxing nature sounds
+This skill plays a small variety of relaxing nature sounds
 
 ## Current state
 
@@ -9,20 +9,16 @@ This skill plays a medium variety of relaxing nature sounds
 Working features:
  - It's untested, but in theory:
  - Say 'Play ...
-        ...Beach' for tropical beach sounds
-        ...Boat' for creaky boat sounds 
-        ...Songbirds' for 'Dawn' for lovely birdsong
-        ...Forest' for Forest sounds
-        ...Seashore' for more beach sounds
-        ...Stream' or 'Creek' for the sound of a stream
+        ...Songbirds' or 'Dawn' for lovely birdsong
+        ...Stream' or 'Creek' for the sound of a rainy stream
         ...Ocean' for waves
-        ...Rainforest' for the sounds of the tropical rainforest
-        ...Rain' for a light summer rainforest
         ...Thunderstorm' for a thunderstorm
-        ...gale' for a tropical storm
+        ...Gale' for a tropical storm
+        ...Rainforest' for tropical rainforest
 
 Known issues:
- - (Untested)
+ - So far none
 
 TODO:
- - Testing
+ - Acquire more Creative-Commons or similar licensed soundscapes
+ - Loop audio
