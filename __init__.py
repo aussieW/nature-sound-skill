@@ -32,7 +32,8 @@ try:
     from mycroft.skills.audioservice import AudioService
 except:
     from mycroft.util import play_mp3
-        AudioService = None
+
+AudioService = None
 
 __author__ = 'Hasinator7'
 
