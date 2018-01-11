@@ -165,7 +165,7 @@ class NatureSoundSkill(MycroftSkill):
         if self.audioservice:
             self.audioservice.play(TROPICAL_BEACH_URL, message.data['utterance'])
         else:
-            self.process = play_mp3(TROPICAL_BEACH_URL)
+            self.process = self.play_mp3(TROPICAL_BEACH_URL)
         self.speak_dialog("info",{"environment":"Tropical Beach"})
     
     def handle_boat_intent(self, message):
