@@ -101,7 +101,7 @@ class NatureSoundSkill(MycroftSkill):
     # the method is called.
     #TODO: Loop mp3s
 
-     def handle_ocean_intent(self, message):
+    def handle_river_intent(self, message):
         path = self.getPath("rainy-river.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
