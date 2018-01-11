@@ -64,7 +64,7 @@ class NatureSoundSkill(MycroftSkill):
         super(NatureSoundSkill, self).__init__(name="NatureSoundSkill")
         self.audioservice = None
 
-    def getPath(name):
+    def getPath(self, name):
         return (join(dirname(__file__), "mp3", name))
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
