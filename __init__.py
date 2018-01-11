@@ -41,18 +41,6 @@ __author__ = 'Hasinator7'
 # statements will show up in the command line when running Mycroft.
 LOGGER = getLogger(__name__)
 
-FOREST_WALK_URL = 'http://meditationroom.org/free-nature-sounds/forest-walk-audio/forest-walk.mp3'
-MORNING_SEASHORE_URL = 'http://meditationroom.org/free-nature-sounds/morning-seashore-audio/morning-seashore.mp3'
-SUMMER_RAIN_URL = 'http://meditationroom.org/free-nature-sounds/summer-rain-audio/summer-rain.mp3'
-MOUNTAIN_STREAM_URL = 'http://meditationroom.org/free-nature-sounds/mountain-stream-audio/mountain-stream.mp3'
-TROPICAL_BEACH_URL = 'http://meditationroom.org/free-nature-sounds/tropical-beach-audio/tropical-beach.mp3'
-WOOD_MASTED_SAILBOAT_URL = 'http://meditationroom.org/free-nature-sounds/wood-masted-sailboat-audio/wood-masted-sailboat.mp3'
-DAWN_CHORUS_URL = 'http://meditationroom.org/free-nature-sounds/dawn-chorus-audio/dawn-chorus.mp3'
-URBAN_THUNDERSTORM_URL = 'http://meditationroom.org/free-nature-sounds/urban-thunderstorm-audio/urban-thunderstorm.mp3'
-TROPICAL_STORM_URL = 'http://meditationroom.org/free-nature-sounds/tropical-storm-audio/tropical-storm.mp3'
-RAINFOREST_URL = 'http://meditationroom.org/free-nature-sounds/rainforest-audio/rainforest.mp3'
-OCEAN_WAVES_URL = 'http://meditationroom.org/free-nature-sounds/ocean-waves-audio/ocean-waves.mp3'
-
 
 # The logic of each skill is contained within its own class, which inherits
 # base methods from the MycroftSkill class with the syntax you can see below:
@@ -75,35 +63,10 @@ class NatureSoundSkill(MycroftSkill):
         if AudioService:
             self.audioservice = AudioService(self.emitter)
         
-        morning_intent = IntentBuilder("MorningSeaShoreIntent").\
+        river_intent = IntentBuilder("RiverIntent").\
                          require("PlayKeyword").\
-                         require("MorningSeaShoreKeyword").build()
-        self.register_intent(morning_intent, self.handle_morning_intent)
-        
-        forest_intent = IntentBuilder("ForestWalkIntent").\
-                         require("PlayKeyword").\
-                         require("ForestWalkKeyword").build()
-        self.register_intent(forest_intent, self.handle_forest_intent)
-        
-        summer_intent = IntentBuilder("SummerRainIntent").\
-                         require("PlayKeyword").\
-                         require("SummerRainKeyword").build()
-        self.register_intent(summer_intent, self.handle_summer_intent)
-        
-        mountain_intent = IntentBuilder("MountainStreamIntent").\
-                         require("PlayKeyword").\
-                         require("MountainStreamKeyword").build()
-        self.register_intent(mountain_intent, self.handle_mountain_intent)
-        
-        beach_intent = IntentBuilder("BeachIntent").\
-                         require("PlayKeyword").\
-                         require("BeachKeyword").build()
-        self.register_intent(beach_intent, self.handle_beach_intent)
-        
-        boat_intent = IntentBuilder("BoatIntent").\
-                         require("PlayKeyword").\
-                         require("BoatKeyword").build()
-        self.register_intent(boat_intent, self.handle_boat_intent)
+                         require("RainyRiverKeyword").build()
+        self.register_intent(river_intent, self.handle_river_intent)
         
         dawn_intent = IntentBuilder("DawnIntent").\
                          require("PlayKeyword").\
@@ -136,54 +99,16 @@ class NatureSoundSkill(MycroftSkill):
     # actually speak the text it's passed--instead, that text is the filename
     # of a file in the dialog folder, and Mycroft speaks its contents when
     # the method is called.
-    def handle_morning_intent(self, message):
-        path = self.getPath("morning-seashore.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-        else:
-            self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Morning Seashore"})
-            
-    def handle_forest_intent(self, message):
-        path = self.getPath("forest-walk.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-        else:
-            self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Forest"})
+    #TODO: Loop mp3s
 
-    def handle_summer_intent(self, message):
-        path = self.getPath("summer-rain.mp3")
+     def handle_ocean_intent(self, message):
+        path = self.getPath("rainy-river.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
             self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Summer rain"})
-
-    def handle_mountain_intent(self, message):
-        path = self.getPath("mountain-stream.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-        else:
-            self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Mountain Stream"})
+        self.speak_dialog("info",{"environment":"Rainy river"})
     
-    def handle_beach_intent(self, message):
-        path = self.getPath("tropical-beach.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-        else:
-            self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Tropical Beach"})
-    
-    def handle_boat_intent(self, message):
-        path = self.getPath("wood-masted-sailboat.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-        else:
-            self.process = play_mp3(path)
-        self.speak_dialog("info",{"environment":"Wood masted sailboat"})
-
     def handle_dawn_intent(self, message):
         path = self.getPath("dawn-chorus.mp3")
         if self.audioservice:
