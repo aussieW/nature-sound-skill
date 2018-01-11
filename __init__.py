@@ -137,7 +137,7 @@ class NatureSoundSkill(MycroftSkill):
     # of a file in the dialog folder, and Mycroft speaks its contents when
     # the method is called.
     def handle_morning_intent(self, message):
-        path = getPath("morning-seashore.mp3")
+        path = self.getPath("morning-seashore.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -145,7 +145,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Morning Seashore"})
             
     def handle_forest_intent(self, message):
-        path = getPath("forest-walk.mp3")
+        path = self.getPath("forest-walk.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -153,7 +153,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Forest"})
 
     def handle_summer_intent(self, message):
-        path = getPath("summer-rain.mp3")
+        path = self.getPath("summer-rain.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -161,7 +161,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Summer rain"})
 
     def handle_mountain_intent(self, message):
-        path = getPath("mountain-stream.mp3")
+        path = self.getPath("mountain-stream.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -169,7 +169,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Mountain Stream"})
     
     def handle_beach_intent(self, message):
-        path = getPath("tropical-beach.mp3")
+        path = self.getPath("tropical-beach.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -177,7 +177,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Tropical Beach"})
     
     def handle_boat_intent(self, message):
-        path = getPath("wood-masted-sailboat.mp3")
+        path = self.getPath("wood-masted-sailboat.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -185,7 +185,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Wood masted sailboat"})
 
     def handle_dawn_intent(self, message):
-        path = getPath("dawn-chorus.mp3")
+        path = self.getPath("dawn-chorus.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -193,7 +193,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Dawn chorus"})
 
     def handle_thunderstorm_intent(self, message):
-        path = getPath("urban-thunderstorm.mp3")
+        path = self.getPath("urban-thunderstorm.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -201,7 +201,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Thunderstorm"})
 
     def handle_tropical_storm_intent(self, message):
-        path = getPath("tropical-storm.mp3")
+        path = self.getPath("tropical-storm.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
@@ -209,7 +209,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Tropical Storm"})
 
     def handle_rainforest_intent(self, message):
-        path = getPath("rainforest.mp3")
+        path = self.getPath("rainforest.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
