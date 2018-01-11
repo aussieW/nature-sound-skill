@@ -1,4 +1,4 @@
-# Play_Nature_Sounds skill
+# Nature Sound skill
 
 This skill plays a medium variety of relaxing nature sounds
 
