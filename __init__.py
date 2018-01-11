@@ -23,7 +23,7 @@
 
 # Import statements: the list of outside modules you'll be using in your
 # skills, whether from other files in mycroft-core or from external libraries
-from os.path import dirname
+from os.path import dirname, join
 from os import listdir
 
 from adapt.intent import IntentBuilder
@@ -64,6 +64,8 @@ class NatureSoundSkill(MycroftSkill):
         super(NatureSoundSkill, self).__init__(name="NatureSoundSkill")
         self.audioservice = None
 
+    def getPath(name):
+        return (join(dirname(__file__), "mp3", name))
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
     def initialize(self):
@@ -135,80 +137,91 @@ class NatureSoundSkill(MycroftSkill):
     # of a file in the dialog folder, and Mycroft speaks its contents when
     # the method is called.
     def handle_morning_intent(self, message):
+        path = getPath("morning-seashore.mp3")
         if self.audioservice:
-            self.audioservice.play(MORNING_SEASHORE_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(MORNING_SEASHORE_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Morning Seashore"})
             
     def handle_forest_intent(self, message):
-        #if self.audioservice:
-        #    self.audioservice.play(FOREST_WALK_URL, message.data['utterance'])
-        #else:
-        self.process = play_mp3("mp3/forest-walk.mp3")
+        path = getPath("forest-walk.mp3")
+        if self.audioservice:
+            self.audioservice.play(path, message.data['utterance'])
+        else:
+        self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Forest"})
 
     def handle_summer_intent(self, message):
+        path = getPath("summer-rain.mp3")
         if self.audioservice:
-            self.audioservice.play(SUMMER_RAIN_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(SUMMER_RAIN_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Summer rain"})
 
     def handle_mountain_intent(self, message):
+        path = getPath("mountain-stream.mp3")
         if self.audioservice:
-            self.audioservice.play(MOUNTAIN_STREAM_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(MOUNTAIN_STREAM_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Mountain Stream"})
     
     def handle_beach_intent(self, message):
+        path = getPath("tropical-beach.mp3")
         if self.audioservice:
-            self.audioservice.play(TROPICAL_BEACH_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(TROPICAL_BEACH_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Tropical Beach"})
     
     def handle_boat_intent(self, message):
+        path = getPath("wood-masted-sailboat.mp3")
         if self.audioservice:
-            self.audioservice.play(WOOD_MASTED_SAILBOAT_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(WOOD_MASTED_SAILBOAT_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Wood masted sailboat"})
 
     def handle_dawn_intent(self, message):
+        path = getPath("dawn-chorus.mp3")
         if self.audioservice:
-            self.audioservice.play(DAWN_CHORUS_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(DAWN_CHORUS_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Dawn chorus"})
 
     def handle_thunderstorm_intent(self, message):
+        path = getPath("urban-thunderstorm.mp3")
         if self.audioservice:
-            self.audioservice.play(URBAN_THUNDERSTORM_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(URBAN_THUNDERSTORM_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Thunderstorm"})
 
     def handle_tropical_storm_intent(self, message):
+        path = getPath("tropical-storm.mp3")
         if self.audioservice:
-            self.audioservice.play(TROPICAL_STORM_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(TROPICAL_STORM_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Tropical Storm"})
 
     def handle_rainforest_intent(self, message):
+        path = getPath("rainforest.mp3")
         if self.audioservice:
-            self.audioservice.play(RAINFOREST_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(RAINFOREST_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Rainforest"})
 
     def handle_ocean_intent(self, message):
+        path = getPath("ocean-waves.mp3")
         if self.audioservice:
-            self.audioservice.play(OCEAN_WAVES_URL, message.data['utterance'])
+            self.audioservice.play(path, message.data['utterance'])
         else:
-            self.process = play_mp3(OCEAN_WAVES_URL)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Ocean waves"})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
