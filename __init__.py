@@ -149,7 +149,7 @@ class NatureSoundSkill(MycroftSkill):
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
-        self.process = play_mp3(path)
+            self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Forest"})
 
     def handle_summer_intent(self, message):
