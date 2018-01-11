@@ -217,7 +217,7 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Rainforest"})
 
     def handle_ocean_intent(self, message):
-        path = getPath("ocean-waves.mp3")
+        path = self.getPath("ocean-waves.mp3")
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
         else:
