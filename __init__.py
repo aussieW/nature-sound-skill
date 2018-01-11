@@ -32,9 +32,7 @@ try:
     from mycroft.skills.audioservice import AudioService
 except:
     from mycroft.util import play_mp3
-    play_mp3 = None
-
-AudioService = None
+    AudioService = None
 
 __author__ = 'Hasinator7'
 
@@ -63,6 +61,7 @@ class NatureSoundSkill(MycroftSkill):
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(NatureSoundSkill, self).__init__(name="NatureSoundSkill")
+        self.audioservice = None
 
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
