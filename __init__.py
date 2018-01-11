@@ -24,6 +24,7 @@
 # Import statements: the list of outside modules you'll be using in your
 # skills, whether from other files in mycroft-core or from external libraries
 from os.path import dirname
+from os import listdir
 
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
@@ -141,10 +142,10 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Morning Seashore"})
             
     def handle_forest_intent(self, message):
-        if self.audioservice:
-            self.audioservice.play(FOREST_WALK_URL, message.data['utterance'])
-        else:
-            self.process = play_mp3(FOREST_WALK_URL)
+        #if self.audioservice:
+        #    self.audioservice.play(FOREST_WALK_URL, message.data['utterance'])
+        #else:
+        self.process = play_mp3("mp3/forest-walk.mp3")
         self.speak_dialog("info",{"environment":"Forest"})
 
     def handle_summer_intent(self, message):
