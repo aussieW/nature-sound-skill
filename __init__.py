@@ -32,6 +32,7 @@ try:
     from mycroft.skills.audioservice import AudioService
 except:
     from mycroft.util import play_mp3
+    play_mp3 = None
 
 AudioService = None
 
@@ -165,7 +166,7 @@ class NatureSoundSkill(MycroftSkill):
         if self.audioservice:
             self.audioservice.play(TROPICAL_BEACH_URL, message.data['utterance'])
         else:
-            self.process = self.play_mp3(TROPICAL_BEACH_URL)
+            self.process = play_mp3(TROPICAL_BEACH_URL)
         self.speak_dialog("info",{"environment":"Tropical Beach"})
     
     def handle_boat_intent(self, message):
