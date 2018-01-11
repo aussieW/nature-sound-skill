@@ -148,67 +148,67 @@ class NatureSoundSkill(MycroftSkill):
          self.speak_dialog("info",{"environment":"Forest"})
 
     def handle_summer_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(SUMMER_RAIN_URL, message.data['utterance'])
         else:
             self.process = play_mp3(SUMMER_RAIN_URL)
         self.speak_dialog("info",{"environment":"Summer rain"})
 
     def handle_mountain_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(MOUNTAIN_STREAM_URL, message.data['utterance'])
         else:
             self.process = play_mp3(MOUNTAIN_STREAM_URL)
-         self.speak_dialog("info",{"environment":"Mountain Stream"})
+        self.speak_dialog("info",{"environment":"Mountain Stream"})
     
     def handle_beach_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(TROPICAL_BEACH_URL, message.data['utterance'])
         else:
             self.process = play_mp3(TROPICAL_BEACH_URL)
-         self.speak_dialog("info",{"environment":"Tropical Beach"})
+        self.speak_dialog("info",{"environment":"Tropical Beach"})
     
     def handle_boat_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(WOOD_MASTED_SAILBOAT_URL, message.data['utterance'])
         else:
             self.process = play_mp3(WOOD_MASTED_SAILBOAT_URL)
-         self.speak_dialog("info",{"environment":"Wood masted sailboat"})
+        self.speak_dialog("info",{"environment":"Wood masted sailboat"})
 
     def handle_dawn_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(DAWN_CHORUS_URL, message.data['utterance'])
         else:
             self.process = play_mp3(DAWN_CHORUS_URL)
         self.speak_dialog("info",{"environment":"Dawn chorus"})
 
     def handle_thunderstorm_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(URBAN_THUNDERSTORM_URL, message.data['utterance'])
         else:
             self.process = play_mp3(URBAN_THUNDERSTORM_URL)
-         self.speak_dialog("info",{"environment":"Thunderstorm"})
+        self.speak_dialog("info",{"environment":"Thunderstorm"})
 
     def handle_tropical_storm_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(TROPICAL_STORM_URL, message.data['utterance'])
         else:
             self.process = play_mp3(TROPICAL_STORM_URL)
-         self.speak_dialog("info",{"environment":"Tropical Storm"})
+        self.speak_dialog("info",{"environment":"Tropical Storm"})
 
     def handle_rainforest_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(RAINFOREST_URL, message.data['utterance'])
         else:
             self.process = play_mp3(RAINFOREST_URL)
-         self.speak_dialog("info",{"environment":"Rainforest"})
+        self.speak_dialog("info",{"environment":"Rainforest"})
 
     def handle_ocean_intent(self, message):
-         if self.audioservice:
+        if self.audioservice:
             self.audioservice.play(OCEAN_WAVES_URL, message.data['utterance'])
         else:
             self.process = play_mp3(OCEAN_WAVES_URL)
-         self.speak_dialog("info",{"environment":"Ocean waves"})
+        self.speak_dialog("info",{"environment":"Ocean waves"})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, the method just contains the keyword "pass", which
