@@ -153,7 +153,11 @@ class NatureSoundSkill(MycroftSkill):
     # is extremely simple, the method just contains the keyword "pass", which
     # does nothing.
     def stop(self):
-        pass
+        if self.audioservice:
+            self.audioservice.stop()
+        else:
+            self.process.terminate()
+            self.process.wait()
 
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
