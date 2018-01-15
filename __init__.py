@@ -62,6 +62,10 @@ class NatureSoundSkill(MycroftSkill):
         
         if AudioService:
             self.audioservice = AudioService(self.emitter)
+            self.audioservice.stop()
+        else:
+            self.process.terminate()
+            self.process.wait()
         
         river_intent = IntentBuilder("RiverIntent").\
                          require("PlayKeyword").\
