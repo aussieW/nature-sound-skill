@@ -96,6 +96,11 @@ class NatureSoundSkill(MycroftSkill):
                          require("PlayKeyword").\
                          require("RainforestKeyword").build()
         self.register_intent(rainforest_intent, self.handle_rainforest_intent)
+        
+        hotspring_intent = IntentBuilder("HotSpringIntent").\
+                         require("PlayKeyword").\
+                         require("HotSpringKeyword").build()
+        self.register_intent(rainforest_intent, self.handle_hotspring_intent)
 
     # The "handle_xxxx_intent" functions define Mycroft's behavior when
     # each of the skill's intents is triggered: in this case, he simply
@@ -152,6 +157,16 @@ class NatureSoundSkill(MycroftSkill):
         else:
             self.process = play_mp3(path)
         self.speak_dialog("info",{"environment":"Ocean waves"})
+       
+    def handle_hotspring_intent(self, message):
+        path = self.getPath("hot-spring.mp3")
+        if self.audioservice:
+            self.audioservice.play(path, message.data['utterance'])
+            for i in range(0,100):
+                self.audioservice.queue(path)
+        else:
+            self.process = play_mp3(path)
+        self.speak_dialog("info",{"environment":"Hot spring"})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, the method just contains the keyword "pass", which
