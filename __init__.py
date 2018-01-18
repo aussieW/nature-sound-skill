@@ -26,6 +26,9 @@
 from os.path import dirname, join
 from os import listdir
 
+import pyaudio
+import wave
+
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
 from mycroft.util.log import getLogger
@@ -46,7 +49,8 @@ LOGGER = getLogger(__name__)
 # base methods from the MycroftSkill class with the syntax you can see below:
 # "class ____Skill(MycroftSkill)"
 class NatureSoundSkill(MycroftSkill):
-
+    CHUNK = 1024
+    loop = True
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(NatureSoundSkill, self).__init__(name="NatureSoundSkill")
@@ -100,8 +104,22 @@ class NatureSoundSkill(MycroftSkill):
         hotspring_intent = IntentBuilder("HotSpringIntent").\
                          require("PlayKeyword").\
                          require("HotSpringKeyword").build()
-        self.register_intent(rainforest_intent, self.handle_hotspring_intent)
-
+        self.register_intent(hotspring_intent, self.handle_hotspring_intent)
+        
+    def loopfile(self, path):
+        wf = wave.open(path)
+        player = pyaudio.PyAudio()
+        stream = player.open(format = player.get_format_from_width(wf.getsampwidth()), channels = wf.getnchannels(), rate= wf.getframerate(), output = True)
+        data = wf.readframes(self.CHUNK)
+        while self.loop:
+            stream.write(data)
+            data = wf.readframes(self.CHUNK)
+            if data == '':
+                wf.rewind()
+                data = wf.readframes(self.CHUNK)
+        stream.close()
+        player.terminate()
+        
     # The "handle_xxxx_intent" functions define Mycroft's behavior when
     # each of the skill's intents is triggered: in this case, he simply
     # speaks a response. Note that the "speak_dialog" method doesn't
@@ -159,19 +177,15 @@ class NatureSoundSkill(MycroftSkill):
         self.speak_dialog("info",{"environment":"Ocean waves"})
        
     def handle_hotspring_intent(self, message):
-        path = self.getPath("hot-spring.mp3")
-        if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
-            for i in range(0,100):
-                self.audioservice.queue(path)
-        else:
-            self.process = play_mp3(path)
+        path = self.getPath("hot-spring.wav")
         self.speak_dialog("info",{"environment":"Hot spring"})
+        self.loopfile(path)
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, the method just contains the keyword "pass", which
     # does nothing.
     def stop(self):
+        self.loop = False
         if self.audioservice:
             self.audioservice.stop()
         else:
