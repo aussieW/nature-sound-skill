@@ -27,6 +27,7 @@ from os.path import dirname, join, exists, splitext
 from os import listdir
 from time import sleep
 from random import choice
+from tinytag import TinyTag
 
 #from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
@@ -100,8 +101,13 @@ class NatureSoundSkill(MycroftSkill):
             self.speak('playing a random sound')
             path = self.getPath(choice(self.getSoundFiles()))
         LOGGER.info('NatureSoundSkill: Playing ' + path)
+        # queue up about an hour's worth of listening
+        tag = TinyTag.get(path)
+        playlist = []
+        for i in range(int(3600 / tag.duration)):
+            playlist.append(path)
         if self.audioservice:
-            self.audioservice.play(path, message.data['utterance'])
+            self.audioservice.play(playlist, message.data['utterance'])
 
     def handle_library_intent(self, message):
         # list available relaxation music
