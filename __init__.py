@@ -88,7 +88,8 @@ class NatureSoundSkill(MycroftSkill):
         self.speak('Here are the sound files you have in your library')
         time.sleep(1)
         for f in sound_files:
-            f = f.strip('.mp3')
+            # make the filename speakable
+            f = f.replace('.mp3', '')
             f = f.replace('-', ' ')
             self.speak(f)
             time.sleep(.5)
