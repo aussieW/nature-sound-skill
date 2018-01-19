@@ -60,8 +60,8 @@ class NatureSoundSkill(MycroftSkill):
             # make the filename speakable
             f = f.replace('.mp3', '')
             f = f.replace('-', ' ')
-            sound_files.append(f)
-        return sound_files
+            sounds.append(f)
+        return sounds
     
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
@@ -82,9 +82,9 @@ class NatureSoundSkill(MycroftSkill):
     #TODO: Loop mp3s
 
     def handle_play_intent(self, message):
+        LOGGER.info('NatureSoundSkill: playing sound file')
         self.stop()  # ???? Just in case something is already playing ????
         sound = message.data.get('sound')
-        LOGGER.info('NatureSoundSkill: Requested sound is ' + sound)
         sound = sound.replace(' ', '-')
         if not exists(path):  # can't find the sound file so play a random sound
             if sound:
@@ -98,6 +98,7 @@ class NatureSoundSkill(MycroftSkill):
 
     def handle_library_intent(self, message):
         # list available relaxation music
+        LOGGER.info('NatureSoundSkill: listing available sounds')
         sounds = self.getSounds()
         self.speak('Here are the sound files you have in your library')
         sleep(1)
