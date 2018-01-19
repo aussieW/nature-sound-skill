@@ -1,4 +1,5 @@
-play {sound} relaxation music
+play (|{sound}) relaxation music
 listen to {sound} relaxation music
 relax (with|to) {sound}
 relax to the sound of (|the) {sound}
+play relaxing (music|sounds|{sounds})
