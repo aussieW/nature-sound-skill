@@ -99,6 +99,7 @@ class NatureSoundSkill(MycroftSkill):
                 sleep(1)
             self.speak('playing a random sound')
             path = choice(self.getSoundFiles())
+            LOGGER.info('NatureSoundSkill: Playing ' + path)
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
 
