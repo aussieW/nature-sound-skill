@@ -56,6 +56,7 @@ class NatureSoundSkill(MycroftSkill):
     # creates and registers each intent that the skill uses
     def initialize(self):
         self.register_intent_file('play.intent', self.handle_play_intent)
+        self.register_intent_file('library.intent', self.handle_library_intent)
         
         if AudioService:
             self.audioservice = AudioService(self.emitter)
@@ -80,7 +81,10 @@ class NatureSoundSkill(MycroftSkill):
             return
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
-    
+
+    def handle_library_intent(self, message):
+        # list available relaxation music
+        pass()
     
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
