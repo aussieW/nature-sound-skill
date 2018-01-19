@@ -25,7 +25,8 @@
 # skills, whether from other files in mycroft-core or from external libraries
 from os.path import dirname, join, exists, splitext
 from os import listdir
-import time
+from time import sleep
+from random import choice
 
 #from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
@@ -52,6 +53,16 @@ class NatureSoundSkill(MycroftSkill):
     def getPath(self, name):
         return (join(dirname(__file__), "mp3", name))
     
+    def getSounds(self):
+        sound_files = [f for f in listdir(join(dirname(__file__), 'mp3')) if splitext(f)[1] == '.mp3']
+        sounds = []
+        for f in sound_files:
+            # make the filename speakable
+            f = f.replace('.mp3', '')
+            f = f.replace('-', ' ')
+            sound_files.append(f)
+        return sound_files
+    
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
     def initialize(self):
@@ -75,24 +86,24 @@ class NatureSoundSkill(MycroftSkill):
         sound = message.data.get('sound')
         LOGGER.info('NatureSoundSkill: Requested sound is ' + sound)
         sound = sound.replace(' ', '-')
+        if not exists(path):  # can't find the sound file so play a random sound
+            if sound:
+                self.speak('sorry, I could not find that sound')
+                sleep(1)
+            self.speak('playing a random sound')
+            sound = choice(self.getSounds())
         path = self.getPath(sound + '.mp3')
-        if not exists(path):
-            self.speak('sorry, I could play that')
-            return
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
 
     def handle_library_intent(self, message):
         # list available relaxation music
-        sound_files = [f for f in listdir(join(dirname(__file__), 'mp3')) if splitext(f)[1] == '.mp3']
+        sounds = self.getSounds()
         self.speak('Here are the sound files you have in your library')
-        time.sleep(1)
-        for f in sound_files:
-            # make the filename speakable
-            f = f.replace('.mp3', '')
-            f = f.replace('-', ' ')
-            self.speak(f)
-            time.sleep(.5)
+        sleep(1)
+        for sound in sounds:
+            self.speak(sound)
+            sleep(.5)
     
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
