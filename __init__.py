@@ -23,13 +23,13 @@
 
 # Import statements: the list of outside modules you'll be using in your
 # skills, whether from other files in mycroft-core or from external libraries
-from os.path import dirname, join, exists
+from os.path import dirname, join, exists, splitext
 from os import listdir
+import time
 
 #from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill
 from mycroft.skills.audioservice import AudioService
-
 from mycroft.util.log import getLogger
 
 __author__ = 'Hasinator7'
@@ -84,7 +84,14 @@ class NatureSoundSkill(MycroftSkill):
 
     def handle_library_intent(self, message):
         # list available relaxation music
-        pass()
+        sound_files = [f for f in listdir(dirname(__file__)) if splitext(f)[1] == '.mp3']
+        self.speak('Here are the sound files you have in your library')
+        time.sleep(1)
+        for f in sound_files:
+            f = f.strip('.mp3')
+            f = f.replace('-', ' ')
+            self.speak(f)
+            time.sleep(.5)
     
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
