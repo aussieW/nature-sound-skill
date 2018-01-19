@@ -100,12 +100,12 @@ class NatureSoundSkill(MycroftSkill):
                 sleep(1)
             self.speak('playing a random sound')
             path = self.getPath(choice(self.getSoundFiles()))
-        LOGGER.info('NatureSoundSkill: Playing ' + path)
         # queue up about an hour's worth of listening
         tag = TinyTag.get(path)
         playlist = []
         for i in range(int(3600 / tag.duration)):
             playlist.append(path)
+        LOGGER.info('NatureSoundSkill: Playing ' + playlist)
         if self.audioservice:
             self.audioservice.play(playlist, message.data['utterance'])
 
