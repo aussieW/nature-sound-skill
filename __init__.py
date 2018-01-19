@@ -105,7 +105,7 @@ class NatureSoundSkill(MycroftSkill):
         playlist = []
         for i in range(int(3600 / tag.duration)):
             playlist.append(path)
-        LOGGER.info('NatureSoundSkill: Playing ' + playlist)
+        LOGGER.info('NatureSoundSkill: Playing ' + str(playlist))
         if self.audioservice:
             self.audioservice.play(playlist, message.data['utterance'])
 
