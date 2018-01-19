@@ -84,7 +84,7 @@ class NatureSoundSkill(MycroftSkill):
 
     def handle_library_intent(self, message):
         # list available relaxation music
-        sound_files = [f for f in listdir(dirname(__file__)) if splitext(f)[1] == '.mp3']
+        sound_files = [f for f in listdir(join(dirname(__file__), 'mp3')) if splitext(f)[1] == '.mp3']
         self.speak('Here are the sound files you have in your library')
         time.sleep(1)
         for f in sound_files:
