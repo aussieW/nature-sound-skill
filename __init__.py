@@ -50,6 +50,7 @@ class NatureSoundSkill(MycroftSkill):
     def __init__(self):
         super(NatureSoundSkill, self).__init__(name="NatureSoundSkill")
         self.audioservice = None
+        self.minPlayDuraion = None
 
     def getPath(self, name):
         return (join(dirname(__file__), "mp3", name))
@@ -72,6 +73,8 @@ class NatureSoundSkill(MycroftSkill):
     def initialize(self):
         self.register_intent_file('play.intent', self.handle_play_intent)
         self.register_intent_file('library.intent', self.handle_library_intent)
+        
+        self.minPlayDuraion = 3600  # set minimum play duraion to 1 hour
         
         if AudioService:
             self.audioservice = AudioService(self.emitter)
@@ -103,7 +106,7 @@ class NatureSoundSkill(MycroftSkill):
         # queue up about an hour's worth of listening
         tag = TinyTag.get(path)
         playlist = []
-        for i in range(int(3600 / tag.duration)):
+        for i in range(int(self.minPlayDuraion / tag.duration)):
             playlist.append(path)
         LOGGER.info('NatureSoundSkill: Playing ' + str(playlist))
         if self.audioservice:
@@ -117,7 +120,7 @@ class NatureSoundSkill(MycroftSkill):
         sleep(1)
         for sound in sounds:
             self.speak(sound)
-            sleep(.5)
+            sleep(.75)
     
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
