@@ -85,14 +85,17 @@ class NatureSoundSkill(MycroftSkill):
         LOGGER.info('NatureSoundSkill: playing sound file')
         self.stop()  # ???? Just in case something is already playing ????
         sound = message.data.get('sound')
-        sound = sound.replace(' ', '-')
+        try:
+            sound = sound.replace(' ', '-')
+        except:
+            pass
+        path = self.getPath(sound + '.mp3')
         if not exists(path):  # can't find the sound file so play a random sound
             if sound:
                 self.speak('sorry, I could not find that sound')
                 sleep(1)
             self.speak('playing a random sound')
             sound = choice(self.getSounds())
-        path = self.getPath(sound + '.mp3')
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
 
