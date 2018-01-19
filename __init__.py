@@ -54,7 +54,7 @@ class NatureSoundSkill(MycroftSkill):
         return (join(dirname(__file__), "mp3", name))
     
     def getSounds(self):
-        sound_files = [f for f in listdir(join(dirname(__file__), 'mp3')) if splitext(f)[1] == '.mp3']
+        sound_files = self.getSoundFiles()
         sounds = []
         for f in sound_files:
             # make the filename speakable
@@ -62,6 +62,9 @@ class NatureSoundSkill(MycroftSkill):
             f = f.replace('-', ' ')
             sounds.append(f)
         return sounds
+    
+    def getSoundFiles(self):
+        return [f for f in listdir(join(dirname(__file__), 'mp3')) if splitext(f)[1] == '.mp3']
     
     # This method loads the files needed for the skill's functioning, and
     # creates and registers each intent that the skill uses
@@ -88,14 +91,14 @@ class NatureSoundSkill(MycroftSkill):
         try:
             sound = sound.replace(' ', '-')
         except:
-            pass
+            sound = ''
         path = self.getPath(sound + '.mp3')
         if not exists(path):  # can't find the sound file so play a random sound
             if sound:
                 self.speak('sorry, I could not find that sound')
                 sleep(1)
             self.speak('playing a random sound')
-            sound = choice(self.getSounds())
+            path = choice(self.getSoundFiles())
         if self.audioservice:
             self.audioservice.play(path, message.data['utterance'])
 
