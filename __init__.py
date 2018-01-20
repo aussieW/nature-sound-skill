@@ -110,7 +110,7 @@ class NatureSoundSkill(MycroftSkill):
             playlist.append(path)
         LOGGER.info('NatureSoundSkill: Playing ' + str(playlist))
         if self.audioservice:
-            self.audioservice.play(playlist, message.data['utterance'])
+            self.audioservice.play(playlist)  #, message.data['utterance'])
 
     def handle_library_intent(self, message):
         # list available relaxation music
