@@ -96,6 +96,7 @@ class NatureSoundSkill(MycroftSkill):
             sound = sound.replace(' ', '-')
         except:
             sound = ''
+        LOGGER.info('NatureSoundSkill: Looking for ' + sound)
         path = self.getPath(sound + '.mp3')
         if not exists(path):  # can't find the sound file so play a random sound
             if sound:
