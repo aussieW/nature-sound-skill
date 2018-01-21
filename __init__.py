@@ -99,10 +99,12 @@ class NatureSoundSkill(MycroftSkill):
         LOGGER.info('NatureSoundSkill: Looking for ' + sound)
         path = self.getPath(sound + '.mp3')
         if not exists(path):  # can't find the sound file so play a random sound
+            qualifier = ''
             if sound:
                 self.speak('sorry, I could not find that sound')
+                qualifier = ' instead'
                 sleep(1)
-            self.speak('playing a random sound')
+            self.speak('playing a random sound' + qualifier)
             path = self.getPath(choice(self.getSoundFiles()))
         # queue up about an hour's worth of listening
         tag = TinyTag.get(path)
