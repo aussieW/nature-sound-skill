@@ -74,6 +74,10 @@ class NatureSoundSkill(MycroftSkill):
         self.register_intent_file('play.intent', self.handle_play_intent)
         self.register_intent_file('library.intent', self.handle_library_intent)
         
+        with open(join(self.vocab_dir, 'sounds.entity'), 'w') as f:
+            f.write('\n'.join(self.getSounds()))
+        self.register_entity_file('sounds.entity')
+        
         self.minPlayDuraion = 3600  # set minimum play duraion to 1 hour
         
         if AudioService:
