@@ -63,6 +63,7 @@ class NatureSoundSkill(MycroftSkill):
             f = f.replace('.mp3', '')
             f = f.replace('-', ' ')
             sounds.append(f)
+        LOGGER.info('NatureSkill: Available sound files = ' + str(sounds))
         return sounds
     
     def getSoundFiles(self):
@@ -94,7 +95,7 @@ class NatureSoundSkill(MycroftSkill):
 
     def handle_play_intent(self, message):
         LOGGER.info('NatureSoundSkill: playing sound file')
-        self.stop()  # ???? Just in case something is already playing ????
+        self.stop()  # in case something is already playing
         sound = message.data.get('sound')
         try:
             sound = sound.replace(' ', '-')
@@ -121,6 +122,7 @@ class NatureSoundSkill(MycroftSkill):
 
     def handle_library_intent(self, message):
         # list available relaxation music
+        self.stop()  # in case something is already playing
         LOGGER.info('NatureSoundSkill: listing available sounds')
         sounds = self.getSounds()
         self.speak('Here are the sound files you have in your library')
