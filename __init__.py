@@ -34,7 +34,7 @@ from mycroft.skills.core import MycroftSkill
 from mycroft.skills.audioservice import AudioService
 from mycroft.util.log import getLogger
 
-__author__ = 'Hasinator7'
+__author__ = 'aussieW'  # originally developed by 'Hasinator7'
 
 # Logger: used for debug lines, like "LOGGER.debug(xyz)". These
 # statements will show up in the command line when running Mycroft.
